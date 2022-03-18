@@ -11,7 +11,7 @@ weatherForm.addEventListener('submit', (event) => {
     para.innerHTML = 'Loading...'
     div.appendChild(para)
     
-    fetch(`http://localhost:3000/weather?address=${searchText}`).then((response) => {
+    fetch(`/weather?address=${searchText}`).then((response) => {
     response.json().then((data) => {
         if(data.error) {
             const div = document.getElementById('output')
