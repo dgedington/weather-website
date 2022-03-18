@@ -8,8 +8,8 @@ const weather = (latitude, longitude, callback) => {
         } else if (body.error) {
             callback('Please specify a valid location identifier.', undefined)
         } else {
-            const data = {description: body.current.weather_descriptions[0], temperature: body.current.temperature, feelslike: body.current.feelslike} 
-            const dataString = `The current condition are ${data.description}. The temperature is ${data.temperature}°C, but it feels like ${data.feelslike}°C`
+            const data = {description: body.current.weather_descriptions[0], temperature: body.current.temperature, feelslike: body.current.feelslike, humidity: body.current.humidity} 
+            const dataString = `The current condition are ${data.description}. The temperature is ${data.temperature}°C, but it feels like ${data.feelslike}°C and the humidity is ${data.humidity}%`
             callback(undefined, dataString)
         }
     })
