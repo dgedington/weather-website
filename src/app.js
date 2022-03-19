@@ -33,7 +33,8 @@ app.get('/about', (req, res) => {
         title: 'About',
         name: 'Daniel Edington',
         content1: 'This site was created by Daniel Edington as part of a Node.js class.',
-        content2: 'It uses data from mapbox.com and weatherstack.com.'
+        content2: 'It uses data from mapbox.com and weatherstack.com.',
+        content3: 'I modified it to use the OpenWeatherMap API to get more free API calls per month.'
     })
 })
 

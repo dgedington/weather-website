@@ -4,14 +4,13 @@ const searchElement = document.querySelector('input')
 weatherForm.addEventListener('submit', (event) => {
     event.preventDefault()
     const searchText = searchElement.value
-
     const div = document.getElementById('output')
     div.innerHTML = ""
     const para = document.createElement("p")
     para.innerHTML = 'Loading...'
     div.appendChild(para)
     
-    fetch(`/weather?address=${searchText}`).then((response) => {
+    fetch('/weather?address=' + searchText).then((response) => {
     response.json().then((data) => {
         if(data.error) {
             const div = document.getElementById('output')
