@@ -3,7 +3,7 @@ const searchElement = document.querySelector('input')
 
 weatherForm.addEventListener('submit', (event) => {
     event.preventDefault()
-    const searchText = searchElement.value
+    let searchText = searchElement.value
     const div = document.getElementById('output')
     div.innerHTML = ""
     const para = document.createElement("p")
@@ -42,4 +42,7 @@ weatherForm.addEventListener('submit', (event) => {
             }
         })
     })
+
+    searchElement.value = ""
+    
 })
