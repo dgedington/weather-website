@@ -9,10 +9,12 @@ const weather = (latitude, longitude, callback) => {
         } else if (response.error) {
             callback('Please specify a valid location identifier.', undefined)
         } else {
-            const data = {description: response.body.weather[0].description, temperature: response.body.main.temp, feelslike: response.body.main.feels_like, humidity: response.body.main.humidity} 
+
+            const icon = `http://openweathermap.org/img/wn/${response.body.weather[0].icon}@2x.png`
+            const data = {description: response.body.weather[0].description, temperature: response.body.main.temp, feelslike: response.body.main.feels_like, humidity: response.body.main.humidity, icon: icon, pressure: response.body.main.pressure } 
             
-            const dataString = `The current condition are ${data.description}. The temperature is ${data.temperature}°C, but it feels like ${data.feelslike}°C and the humidity is ${data.humidity}%`
-            callback(undefined, dataString)
+            // const dataString = `The current condition are ${data.description}. The temperature is ${data.temperature}°C, but it feels like ${data.feelslike}°C and the humidity is ${data.humidity}%`
+            callback(undefined, data)
         }
     })
 }
