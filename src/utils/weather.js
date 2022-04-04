@@ -1,8 +1,7 @@
 const request = require('request')
 
 const weather = (latitude, longitude, callback) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=d085cf2a073adf7af5739b16f1ebeae2&units=metric`
-    // const url = `http://api.weatherstack.com/current?access_key=69e0c704b58d1aa5ed7e49467e37ef3c&query=${latitude},${longitude}`
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.OPENWEATHER_API_KEY}&units=metric`
     request({ url, json: true }, (error, response) => {
         if (error) {
             callback('Unable to connect to weather service.', undefined)
