@@ -6,7 +6,7 @@ const weather = require('./utils/weather')
 
 
 const app =  express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 // path definitions for express configuration
 const publicDirectoryPath = path.join(__dirname, '../public') 
@@ -22,28 +22,7 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(publicDirectoryPath))
 
 app.get('', (req, res) => {
-    res.render('index', {
-        title: 'Weather App',
-        name: 'Daniel Edington'
-    })
-})
-
-app.get('/about', (req, res) => {
-    res.render('about', {
-        title: 'About',
-        name: 'Daniel Edington',
-        content1: 'This site was created by me as part of a Node.js class.',
-        content2: 'It uses data from mapbox.com and weatherstack.com.',
-        content3: 'I modified it to use the OpenWeatherMap API to get more free API calls per month.'
-    })
-})
-
-app.get('/help', (req, res) => {
-    res.render('help', {
-        title: 'Help Page',
-        name: 'Daniel Edington',
-        content: 'The help page is a lie, you are on your own!'
-    })
+    res.render('index')
 })
 
 app.get('/weather', (req, res) => {
@@ -61,42 +40,15 @@ app.get('/weather', (req, res) => {
             if(error) {
                 return res.send({ error })
             }
-             
-            res.send({
-                location: placename,
-                weather: weatherData,
-                address: req.query.address
-            })
+            
+            const data = { location: placename, weather: weatherData }
+            res.send(data)
           })
     }) 
 })
 
-app.get('/products', (req, res) => {
-    if (!req.query.search) {
-        res.send({
-            error: 'You must provide a search term.'
-        })
-    } else {
-        res.send({
-            product:[]
-        })
-    }
-})
-
-app.get('/help/*', (req, res) => {
-    res.render('404error', {
-        title: '404 Error',
-        name: 'Daniel Edington',
-        content: 'The help article you are looking for was not found.'
-    })
-})
-
 app.get('*', (req, res) => {
-    res.render('404error', {
-        title: '404 Error',
-        name: 'Daniel Edington',
-        content: 'The page you are looking for was not found.'
-    })
+    res.render('404page')
 })
 
 app.listen(port, () => {

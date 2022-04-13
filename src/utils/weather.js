@@ -1,7 +1,7 @@
 const request = require('request')
 
 const weather = (latitude, longitude, callback) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.OPENWEATHER_API_KEY}&units=metric`
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.OPENWEATHER_API_KEY}&units=imperial`
     request({ url, json: true }, (error, response) => {
         if (error) {
             callback('Unable to connect to weather service.', undefined)
@@ -13,7 +13,7 @@ const weather = (latitude, longitude, callback) => {
             const data = {description: response.body.weather[0].description, temperature: response.body.main.temp, feelslike: response.body.main.feels_like, humidity: response.body.main.humidity, icon: icon, pressure: response.body.main.pressure } 
             
             // const dataString = `The current condition are ${data.description}. The temperature is ${data.temperature}°C, but it feels like ${data.feelslike}°C and the humidity is ${data.humidity}%`
-            callback(undefined, data)
+            callback(undefined, response.body)
         }
     })
 }
